@@ -135,13 +135,28 @@ public class Point implements Comparable<Point> {
      * @return the Comparator that defines this ordering on points
      */
     public Comparator<Point> slopeOrder() {
-        return null;
+        return new SlopeOrder();
         /* YOUR CODE HERE */
     }
 
 
-    private static class slopeOrder implements Comparator<Point>{
-        private int compare(Point Point1,Point Point2){
+    private  class SlopeOrder implements Comparator<Point>{
+        Point invokingPoint = Point.this;
+        @Override
+        public int compare(Point Point1,Point Point2){
+            // if the first point is larger than the second point
+            if (invokingPoint.slopeTo(Point1)>invokingPoint.slopeTo(Point2)){
+                return 1;
+            }
+            // checking for the vice versa of the above comment
+            else if(invokingPoint.slopeTo(Point1)<invokingPoint.slopeTo(Point2)){
+                return -1;
+            }
+            // condition where the slope to the invoking point are the same
+            else{
+                return 0;
+            }
+
             
 
         }
@@ -195,6 +210,13 @@ public class Point implements Comparable<Point> {
         assert(p1.slopeTo(p1)==Double.NEGATIVE_INFINITY);
         // Test if it can handle a normal slope gradient
         assert(p3.slopeTo(p2) == -0.500);
+        // Test the slope order where the first point is larger than the seconf 
+        assert(p1.slopeOrder().compare(p2,p3) == 1);
+        // test if the correct number is returned when the slope to the invoking point is the same
+        assert(p1.slopeOrder().compare(p2,p2)==0);
+        // test the slope order where the second point slope to the invoking point is larger than the first point
+        assert(p1.slopeOrder().compare(p3,p2) == -1);
+
 
 
     
