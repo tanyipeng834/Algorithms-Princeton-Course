@@ -216,7 +216,6 @@ public class Point implements Comparable<Point> {
         assert(p1.slopeOrder().compare(p2,p2)==0);
         // test the slope order where the second point slope to the invoking point is larger than the first point
         assert(p1.slopeOrder().compare(p3,p2) == -1);
-        System.out.println("Hello");
 
 
     
