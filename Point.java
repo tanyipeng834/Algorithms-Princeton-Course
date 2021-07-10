@@ -61,9 +61,28 @@ public class Point implements Comparable<Point> {
      * @return the slope between this point and the specified point
      */
     public double slopeTo(Point that) {
+        // handle the case of a degenerate point
+
+        if (this.x == that.x && this.y ==that.y){
+            return Double.NEGATIVE_INFINITY;
+        }
+        // handle the case of a horizontal line
+        if (this.y == that.y){
+            return +0.0;
+        }
+        // handle the case of a vertical line
+        if (this.x ==that.x){
+            return Double.POSITIVE_INFINITY;
+
+          
+        }
+        //  handle a normal slope gradient
+        else{
+            return ((double)(that.y-this.y))/(that.x-this.x);
+        }
+
        
-        /* YOUR CODE HERE */
-        return 0;
+    
     }
 
     /**
@@ -121,6 +140,16 @@ public class Point implements Comparable<Point> {
     }
 
 
+    private static class slopeOrder implements Comparator<Point>{
+        private int compare(Point Point1,Point Point2){
+            
+
+        }
+
+
+    }
+
+
     /**
      * Returns a string representation of this point.
      * This method is provide for debugging;
@@ -158,6 +187,15 @@ public class Point implements Comparable<Point> {
         assert(p1.compareTo(p2)<0);
         // Test if the compare to method is able to break by the x - coordinates.
         assert(p3.compareTo(p1)>0);
+        // Test if the slope of a horizontal line returns positive zero
+        assert(p1.slopeTo(p3) == +0.0);
+        // Test if the slope of a vertical line returns positive infinity
+        assert(p2.slopeTo(p1)== Double.POSITIVE_INFINITY);
+        // Test if a degnerate point returns negative infinity.
+        assert(p1.slopeTo(p1)==Double.NEGATIVE_INFINITY);
+        // Test if it can handle a normal slope gradient
+        assert(p3.slopeTo(p2) == -0.500);
+
 
     
         
