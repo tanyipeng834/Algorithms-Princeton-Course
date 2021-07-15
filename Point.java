@@ -78,7 +78,7 @@ public class Point implements Comparable<Point> {
         }
         //  handle a normal slope gradient
         else{
-            return ((double)(that.y-this.y))/(that.x-this.x);
+            return (double)(that.y-this.y)/(that.x-this.x);
         }
 
        
