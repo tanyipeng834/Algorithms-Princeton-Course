@@ -1,3 +1,4 @@
+import java.util.Arrays;
 public class Board {
     private int [][] tiles;
 
@@ -101,23 +102,43 @@ public class Board {
         }
 
     }
-    /*
+    
 
-    // does this board equal y?
+    // board will be the same if there are the same number of wrong tiles and the manhattan distance is the same
     public boolean equals(Object y){
+        // check if it is the same board class type
+        if(this.getClass()==y.getClass()){
+           Board that = (Board)y;
+            if (Arrays.equals(this.tiles,that.tiles)){
+                return true;
+            }
+
+        }
+        return false;
+        
+
+        }
+
+    private int[] getSpace(){
 
     }
+
+    
+    
 
     // all neighboring boards
     public Iterable<Board> neighbors(){
+        
 
     }
+
+    
 
     // a board that is obtained by exchanging any pair of tiles
     public Board twin(){
 
     }
-    */
+    
 
     // unit testing (not graded)
     public static void main(String[] args){
@@ -128,6 +149,8 @@ public class Board {
         System.out.println(boardOne.toString());
         System.out.println(boardOne.hamming());
         System.out.println(boardOne.manhattan());
+
+        
 
 
     }
