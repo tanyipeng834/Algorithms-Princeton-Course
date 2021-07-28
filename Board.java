@@ -1,4 +1,8 @@
 import java.util.Arrays;
+import java.util.Queue;
+import java.util.LinkedList;
+import java.util.Iterator;
+
 public class Board {
     private int [][] tiles;
 
@@ -106,10 +110,13 @@ public class Board {
 
     // board will be the same if there are the same number of wrong tiles and the manhattan distance is the same
     public boolean equals(Object y){
+        if(y==null){
+            throw new IllegalArgumentException("Y cannot be null");
+        }
         // check if it is the same board class type
         if(this.getClass()==y.getClass()){
            Board that = (Board)y;
-            if (Arrays.equals(this.tiles,that.tiles)){
+            if (Arrays.deepEquals(this.tiles,that.tiles)){
                 return true;
             }
 
@@ -119,16 +126,80 @@ public class Board {
 
         }
 
+        // finish get space to get the space in the tiles and also copy function to copy a 2 dimensionall array
+        // do swap function also
+
     private int[] getSpace(){
+        int [] array = new int[2];
+        for ( int i =0; i<this.dimension(); i++){
+            for(int j =0;j<this.dimension();j++){
+                if(this.tiles[i][j]==0){
+                    array[0]=i;
+                    array[1]=j;
+        
+                    return array;
+                    
+                }
+            }
+        }
+        return array;
 
     }
+    private int[][] copyArray(){
+        // allocate sufficient memory for the copy of the 
+        int [] [] copyTiles = new int [this.dimension()][this.dimension()];
+        for (int i =0; i<this.dimension();i++){
+            for(int j =0;j<this.dimension();j++){
+                copyTiles[i][j] = this.tiles[i][j];
+            }
+        }
+        // onced the for loop has eneded return the copied array
+        return copyTiles;
+
+    }
+
+    
 
     
     
 
     // all neighboring boards
+    // lets add the boards in a clockwise fashion
     public Iterable<Board> neighbors(){
+        int[] blankSquare = this.getSpace();
+        Queue<Board> queue = new LinkedList<>(); 
+        if(blankSquare[0]>0){
+            // swap the blank square with the  square on top of it if it is not the top square
+
+            queue.add(new Board(this.swap(blankSquare[0],blankSquare[1],blankSquare[0]-1,blankSquare[1])));
+        }
+        // now we will swap the blnk square with the square to the right
+        if(blankSquare[1]<this.dimension()-1){
+            queue.add(new Board(this.swap(blankSquare[0],blankSquare[1],blankSquare[0],blankSquare[1]+1)));
+        }
+        // now we will swap the blank square with the square bottom to it
+        if(blankSquare[0]<this.dimension()-1){
+            queue.add(new Board(this.swap(blankSquare[0],blankSquare[1],blankSquare[0]-1,blankSquare[1])));
+        }
+        if (blankSquare[1]>0){
+            queue.add(new Board(this.swap(blankSquare[0],blankSquare[1],blankSquare[0],blankSquare[1]-1)));
+        }
+
+        // after adding all the neighbours to it,we will return the iterable
+        return  queue;
         
+
+    }
+    private int[][] swap(int blankRow,int blankColumn,int squareRow,int squareColumn){
+        // use this as a variable to store the temp variable to swap the columns 
+        int [][]copyArray= this.copyArray();
+        // swap this with the blank row
+        copyArray[blankRow][blankColumn] = copyArray[squareRow][squareColumn];
+        // previous filled square will become blank
+        copyArray[squareRow][squareColumn]=0;
+        // after making these changes , i will return this board back
+        return copyArray;
+
 
     }
 
@@ -136,9 +207,22 @@ public class Board {
 
     // a board that is obtained by exchanging any pair of tiles
     public Board twin(){
+        int[] blankSquare =this.getSpace();
+        int[][]copyArray=this.tiles;
+        // ignore the row with the blank square 
+        for(int i =0; i!=blankSquare[0];i++){
+            int temp = copyArray[i][0];
+            // once the squares are swapped break out of this statement
+            copyArray[i][0] = copyArray[i][1];
+        // previous filled square will become blank
+            copyArray[i][1]=temp;
+            break;
+
+        }
+        return new Board(copyArray);
+        
 
     }
-    
 
     // unit testing (not graded)
     public static void main(String[] args){
@@ -146,9 +230,19 @@ public class Board {
                                 {4,5,6},
                                 {7,8,0}};
         Board boardOne = new Board(puzzleBoard);
+        System.out.println(boardOne.dimension());
         System.out.println(boardOne.toString());
         System.out.println(boardOne.hamming());
         System.out.println(boardOne.manhattan());
+        System.out.println(Arrays.toString(boardOne.getSpace()));
+        // copied successfully
+        System.out.println(Arrays.deepToString(boardOne.copyArray()));
+        Iterator iterator = boardOne.neighbors().iterator();
+        while (iterator.hasNext()){
+            System.out.println(iterator.next());
+        }
+        // twin works man
+        System.out.println(boardOne.twin());
 
         
 
