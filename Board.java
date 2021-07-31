@@ -21,9 +21,11 @@ public class Board {
             // iterate through all the 
             for (int j =0; j<this.tiles[0].length;j++ ){
                 // print the value in the respective part of the grid
-                
+                if(j==0){
+                    string+=" ";
+                }
                string +=Integer.toString(this.tiles[i][j]);
-               if(j!=this.tiles[0].length-1){
+               if(j!=this.tiles[0].length-1 ){
                    string +=" ";
                }
 
@@ -179,7 +181,7 @@ public class Board {
         }
         // now we will swap the blank square with the square bottom to it
         if(blankSquare[0]<this.dimension()-1){
-            queue.add(new Board(this.swap(blankSquare[0],blankSquare[1],blankSquare[0]-1,blankSquare[1])));
+            queue.add(new Board(this.swap(blankSquare[0],blankSquare[1],blankSquare[0]+1,blankSquare[1])));
         }
         if (blankSquare[1]>0){
             queue.add(new Board(this.swap(blankSquare[0],blankSquare[1],blankSquare[0],blankSquare[1]-1)));
@@ -210,7 +212,11 @@ public class Board {
         int[] blankSquare =this.getSpace();
         int[][]copyArray=this.tiles;
         // ignore the row with the blank square 
-        for(int i =0; i!=blankSquare[0];i++){
+        for(int i =0; i<this.dimension();i++){
+            // if it is the same row as the blank square go to the next row.
+            if(i==blankSquare[0]){
+                continue;
+            }
             int temp = copyArray[i][0];
             // once the squares are swapped break out of this statement
             copyArray[i][0] = copyArray[i][1];
@@ -226,9 +232,9 @@ public class Board {
 
     // unit testing (not graded)
     public static void main(String[] args){
-        int [][] puzzleBoard = {{1,2,3},
-                                {4,5,6},
-                                {7,8,0}};
+        int [][] puzzleBoard = {{0,1,3},
+                                {4,2,5},
+                                {7,8,6}};
         Board boardOne = new Board(puzzleBoard);
         System.out.println(boardOne.dimension());
         System.out.println(boardOne.toString());
