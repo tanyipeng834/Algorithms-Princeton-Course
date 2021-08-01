@@ -9,8 +9,8 @@ public class Solver {
 
     private class searchNode implements Comparable<searchNode>{
         Board board;
-        int numberOfMoves =0;
-        int manhattanPriority =0;
+        int numberOfMoves;
+        int manhattanPriority ;
         // pointer to the seach node presviously
         searchNode before; 
 
@@ -27,10 +27,10 @@ public class Solver {
             }
         }
         // build a constructor for the search node object
-        private searchNode(Board board,int numberOfMoves, int manhattanPriority,searchNode before){
+        private searchNode(Board board,int numberOfMoves,searchNode before){
             this.board = board;
             this.numberOfMoves = numberOfMoves;
-            this.manhattanPriority = manhattanPriority;
+            this.manhattanPriority = board.manhattan()+numberOfMoves;
             this.before = before;
         }
 
@@ -51,13 +51,11 @@ public class Solver {
         Board twin = this.inital.twin();
         this.priorityQueueTwin = new MinPQ<>();
         // construct the initial search node
-        searchNode initialNode = new searchNode(initial,0,initial.manhattan(),null);
-        searchNode initalNodeTwin = new searchNode(twin,0,twin.manhattan(),null);
-        this.priorityQueue.insert(initialNode);
-        this.priorityQueueTwin.insert(initalNodeTwin);
+        searchNode minNode = new searchNode(initial,0,null);
+        searchNode minNodeTwin = new searchNode(twin,0,null);
+        this.priorityQueue.insert(minNode);
+        this.priorityQueueTwin.insert(minNodeTwin);
 
-        searchNode minNode = initialNode;
-        searchNode minNodeTwin = initalNodeTwin;
         // keep going until one og the board reaches the goal
         while (!this.priorityQueue.min().board.isGoal()&&!this.priorityQueueTwin.min().board.isGoal()){
         
@@ -66,7 +64,7 @@ public class Solver {
             minNodeTwin = this.priorityQueueTwin.delMin();
         
         for(Board board:minNode.board.neighbors()){
-        searchNode node = new searchNode(board,minNode.numberOfMoves+1,board.manhattan()+minNode.numberOfMoves+1,minNode);
+        searchNode node = new searchNode(board,minNode.numberOfMoves+1,minNode);
             // convert all boards into search nodes and add them into the priority queue
             if(minNode.numberOfMoves==0||!minNode.before.board.equals(board)){
                 
@@ -80,7 +78,7 @@ public class Solver {
 
         
         for(Board board:minNodeTwin.board.neighbors()){
-            searchNode node = new searchNode(board,minNodeTwin.numberOfMoves+1,board.manhattan()+minNodeTwin.numberOfMoves+1,minNodeTwin);
+            searchNode node = new searchNode(board,minNodeTwin.numberOfMoves+1,minNodeTwin);
             // convert all boards into search nodes and add them into the priority queue
             if(minNodeTwin.numberOfMoves==0||!minNodeTwin.before.board.equals(board)){
                 
