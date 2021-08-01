@@ -1,12 +1,10 @@
 import edu.princeton.cs.algs4.MinPQ;
 import edu.princeton.cs.algs4.Stack;
 import edu.princeton.cs.algs4.StdOut;
-import edu.princeton.cs.algs4.In;
-import java.util.Arrays;
 public class Solver {
-    MinPQ<searchNode> priorityQueue;
-    Board inital;
-    MinPQ<searchNode> priorityQueueTwin;
+    private MinPQ<searchNode> priorityQueue;
+    private Board inital;
+    private MinPQ<searchNode> priorityQueueTwin;
     
 
     private class searchNode implements Comparable<searchNode>{
@@ -45,13 +43,13 @@ public class Solver {
     }
     public Solver(Board initial){
         if(initial==null){
-            throw new IllegalArgumentException("Board cannot ne null ");
+            throw new IllegalArgumentException("Board cannot be null ");
         }
         this.inital = initial;
-        this.priorityQueue = new MinPQ();
+        this.priorityQueue = new MinPQ<>();
         // get the twin board 
         Board twin = this.inital.twin();
-        this.priorityQueueTwin = new MinPQ();
+        this.priorityQueueTwin = new MinPQ<>();
         // construct the initial search node
         searchNode initialNode = new searchNode(initial,0,initial.manhattan(),null);
         searchNode initalNodeTwin = new searchNode(twin,0,twin.manhattan(),null);
@@ -68,21 +66,29 @@ public class Solver {
             minNodeTwin = this.priorityQueueTwin.delMin();
         
         for(Board board:minNode.board.neighbors()){
+        searchNode node = new searchNode(board,minNode.numberOfMoves+1,board.manhattan()+minNode.numberOfMoves+1,minNode);
             // convert all boards into search nodes and add them into the priority queue
-            if(board!=minNode.board){
-            searchNode node = new searchNode(board,minNode.numberOfMoves+1,board.manhattan()+minNode.numberOfMoves+1,minNode);
+            if(minNode.numberOfMoves==0||!minNode.before.board.equals(board)){
+                
             this.priorityQueue.insert(node);
-            }
 
+            }
+            
+           
         }
+       
+
+        
         for(Board board:minNodeTwin.board.neighbors()){
-            // convert all boards into search nodes and add them into the priority queue
-            if(board!=minNode.board){
             searchNode node = new searchNode(board,minNodeTwin.numberOfMoves+1,board.manhattan()+minNodeTwin.numberOfMoves+1,minNodeTwin);
+            // convert all boards into search nodes and add them into the priority queue
+            if(minNodeTwin.numberOfMoves==0||!minNodeTwin.before.board.equals(board)){
+                
             this.priorityQueueTwin.insert(node);
+
             }
 
-        }
+        
 
 
         }
@@ -93,6 +99,7 @@ public class Solver {
 
 
     }
+}
 
     // is the initial board solvable? (see below)
     public boolean isSolvable(){

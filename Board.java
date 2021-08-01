@@ -1,7 +1,6 @@
 import java.util.Arrays;
 import java.util.Queue;
 import java.util.LinkedList;
-import java.util.Iterator;
 
 public class Board {
     private int [][] tiles;
@@ -9,7 +8,16 @@ public class Board {
     // create a board from an n-by-n array of tiles,
     // where tiles[row][col] = tile at (row, col)
     public Board(int[][] tiles){
-        this.tiles= tiles;
+        int[][] newTiles = new int [tiles.length][tiles.length];
+        for (int i=0;i<tiles.length;i++){
+            for(int j =0;j<tiles.length;j++){
+                newTiles[i][j] = tiles[i][j];
+
+
+            }
+        }
+
+        this.tiles= newTiles;
 
     }
                                            
@@ -56,7 +64,7 @@ public class Board {
         for(int i =0;i<this.dimension();i++){
             for(int j =0;j<this.tiles[0].length;j++){
                 // take care of the empty square in the board
-                if (this.tiles[i][j]!=0 &&this.tiles[i][j]!=(i*3+(j+1))){
+                if (this.tiles[i][j]!=0 &&this.tiles[i][j]!=(i*this.dimension()+(j+1))){
 
                         counter++;
 
@@ -113,13 +121,16 @@ public class Board {
     // board will be the same if there are the same number of wrong tiles and the manhattan distance is the same
     public boolean equals(Object y){
         if(y==null){
-            throw new IllegalArgumentException("Y cannot be null");
+            return false;
         }
         // check if it is the same board class type
         if(this.getClass()==y.getClass()){
            Board that = (Board)y;
             if (Arrays.deepEquals(this.tiles,that.tiles)){
                 return true;
+            }
+            else{
+                return false;
             }
 
         }
@@ -210,7 +221,7 @@ public class Board {
     // a board that is obtained by exchanging any pair of tiles
     public Board twin(){
         int[] blankSquare =this.getSpace();
-        int[][]copyArray=this.tiles;
+        int[][]copyArray=this.copyArray();
         // ignore the row with the blank square 
         for(int i =0; i<this.dimension();i++){
             // if it is the same row as the blank square go to the next row.
@@ -243,12 +254,9 @@ public class Board {
         System.out.println(Arrays.toString(boardOne.getSpace()));
         // copied successfully
         System.out.println(Arrays.deepToString(boardOne.copyArray()));
-        Iterator iterator = boardOne.neighbors().iterator();
-        while (iterator.hasNext()){
-            System.out.println(iterator.next());
-        }
         // twin works man
         System.out.println(boardOne.twin());
+        System.out.println(boardOne.toString());
 
         
 
