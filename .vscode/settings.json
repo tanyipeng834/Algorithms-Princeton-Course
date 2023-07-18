@@ -1,0 +1,11 @@
+{
+  "java.project.referencedLibraries": {
+    "include": [
+      "lib/**/*.jar",
+      "c:\\Users\\Tan Yi Peng\\algs4\\algs4.jar"
+    ],
+    "exclude": [
+      ".lift/algs4.jar"
+    ]
+  }
+}

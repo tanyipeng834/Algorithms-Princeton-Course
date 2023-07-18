@@ -1,0 +1,45 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "BurrowsWheeler",
+      "request": "launch",
+      "mainClass": "BurrowsWheeler",
+      "projectName": "burrows_e61475c5",
+      "args": [
+        "-",
+        "<",
+        "abra.txt"
+      ]
+    },
+    {
+      "type": "java",
+      "name": "CircularSuffixArray",
+      "request": "launch",
+      "mainClass": "CircularSuffixArray",
+      "projectName": "burrows_e61475c5"
+    },
+    {
+      "type": "java",
+      "name": "MoveToFront",
+      "request": "launch",
+      "mainClass": "MoveToFront",
+      "projectName": "burrows_e61475c5",
+      "args": [
+        "+",
+        "<",
+        "abra.txt"
+      ]
+    },
+    {
+      "type": "java",
+      "name": "Current File",
+      "request": "launch",
+      "mainClass": "${file}"
+    }
+  ]
+}
