@@ -1,6 +1,6 @@
 <div align="center">
   <h1>Princeton Algorithm Course</h1>
-  <img src="./images/algorithms.png" alt=" Princeton Algorithm Course" />
+  <img src="./images/algorithms.PNG" alt=" Princeton Algorithm Course" />
 </div>
 
 
@@ -8,7 +8,7 @@
 
 
 
-## Introduction of this course
+## Introduction of this course :closed_book:
 
 <p>This course introduces the fundemental data structures and algorithms to its students to consturct time-optimized and memory optimizes software Applications</p>
 
@@ -25,16 +25,16 @@
  Chapter 6: Context highlights connections to `systems programming`, `scientific computing`, `commercial applications`, `operations research`, and `intractability`.
 
 
-## Grades For this Course
+## Grades For this Course :trophy:
 <div align="center">
   <h3>Part 1</h3>
-  <img src="./images/part1.png" alt=" Princeton Algorithm Course" />
+  <img src="./images/part1.PNG" alt=" Princeton Algorithm Course" />
 </div>
 
 
 <div align="center">
   <h3>Part 2</h3>
-  <img src="./images/part2.png" alt=" Princeton Algorithm Course" />
+  <img src="./images/part2.PNG" alt=" Princeton Algorithm Course" />
 </div>
 
 
