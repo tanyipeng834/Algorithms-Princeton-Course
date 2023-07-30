@@ -1,6 +1,6 @@
 <div align="center">
-  <h1>GIC-banking-application</h1>
-  <img src="./images/gic.png" alt="GIC Logo" />
+  <h1>Princeton Algorithm Course</h1>
+  <img src="./images/gic.png" alt=" Princeton Algorithm Course" />
 </div>
 
 
@@ -9,34 +9,22 @@
 
 
 
-## Configurations for Setting up the Project
+## Introduction of this course
 
-1. Ensure that Maven is installed on a <b>Windows<b/> computer or you can install it [here](https://maven.apache.org/download.cgi)
+<p>This course introduces the fundemental data structures and algorithms to its students to consturct time-optimized and memory optimizes software Applications</p>
 
-2. Run `mvn --version` to ensure that mvn is installed proprerly
+## Grades For this Course
+<div align="center">
+  <h3>Part 1</h3>
+  <img src="./images/part1.png" alt=" Princeton Algorithm Course" />
+</div>
 
-3. Download the packages defined in pom.xml with the command `mvn clean install`
 
-4. Run the application by running this command `mvn exec:java` 
+<div align="center">
+  <h3>Part 2</h3>
+  <img src="./images/part2.png" alt=" Princeton Algorithm Course" />
+</div>
 
-5. Run the tests with `mvn tests`
-
-## Assumption for this project 
-
-1. User will be directed to the menu after  he views the Print Statement which is similar to the other 3 options.
-
-## Design For this Applicationa
-
-1. We used Maven as a dependency manager to be able to allow our users to install dependencies without the .jar executable
-
-2. We also implemented the TDD(Test Driven Development) where we wrote tests on Junit first before building the application and then continued to refactor the code and tests subsequently.
-
-3. We also ensure clear documenation by using javadoc to write our clean and readable documentation which can be found in the index.html in the docs folder.
-![index.html](./images/index.jpg)
-![documentation](./images/documentation.jpg)
-
-4. We used Java due to its performance and it also allows for greater type safety as it is statically typed and it enforces the Object-Orientated Paradigm which allows
-us to break down this complex software into many small and modular components.
 
 
 
