@@ -1,6 +1,6 @@
 <div align="center">
   <h1>Princeton Algorithm Course</h1>
-  <img src="./images/gic.png" alt=" Princeton Algorithm Course" />
+  <img src="./images/algorithms.png" alt=" Princeton Algorithm Course" />
 </div>
 
 
